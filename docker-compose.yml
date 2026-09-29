@@ -1,0 +1,33 @@
+services:
+  backend:
+    build: ./backend
+    container_name: netra-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/model:ro         # put mithu-vit.onnx and mithu-vit.onnx.data in ./models
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      args:
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+        VITE_SUPABASE_PUBLISHABLE_KEY: ${VITE_SUPABASE_PUBLISHABLE_KEY}
+        VITE_SUPABASE_PROJECT_ID: ${VITE_SUPABASE_PROJECT_ID:-local}
+        VITE_NETRA_API_URL: http://localhost:8000/predict
+    container_name: netra-frontend
+    ports:
+      - "8080:8080"
+    environment:
+      SUPABASE_URL: ${VITE_SUPABASE_URL}
+      SUPABASE_PUBLISHABLE_KEY: ${VITE_SUPABASE_PUBLISHABLE_KEY}
+    depends_on:
+      - backend
+    restart: unless-stopped

@@ -1,0 +1,55 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+/*
+ * Drishti Setu Clinical Design System
+ * Engineered for Tele-Ophthalmology & Medical Diagnostics
+ * Strict Editorial Light Theme
+ */
+
+@theme inline {
+  --font-serif: "Source Serif 4", Lora, serif;
+  --font-sans: "Inter", "IBM Plex Sans", sans-serif;
+  
+  --color-ink: #12314F;
+  --color-teal: #0F6F6A;
+  --color-paper: #FFFDD0;
+  --color-paper-alt: #FFFDD0;
+  --color-gray: #5B6472;
+  --color-gray-line: #DDD8CC;
+  --color-amber: #C1652F;
+  --color-green: #3F7D5C;
+}
+
+:root {
+  --color-ink: #12314F;
+  --color-teal: #0F6F6A;
+  --color-paper: #FFFDD0;
+  --color-paper-alt: #FFFDD0;
+  --color-gray: #5B6472;
+  --color-gray-line: #DDD8CC;
+  --color-amber: #C1652F;
+  --color-green: #3F7D5C;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+  }
+}
+
+@layer utilities {
+  .editorial-border {
+    border-color: var(--color-gray-line);
+  }
+}
